@@ -1,0 +1,17 @@
+{
+    "name": "Nate Eagle's [Development] Environment",
+    "description": "A project to set up and maintain an awesome dev environment
+    on disparate Unix-based machines.",
+    "version": "0.0.1",
+    "author": "Nate Eagle",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/neagle/environment"
+    },
+    "engines": {
+        "node": ">= 0.8.16"
+    },
+    "devDependencies": {
+        "grunt": "~0.3.17"
+    }
+}
