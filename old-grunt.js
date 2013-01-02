@@ -4,10 +4,19 @@ module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
     lint: {
-      files: ['grunt.js', 'lib/**/*.js', 'test/**/*.js']
+      files: ['Gruntfile.js']
     },
-    test: {
-      files: ['test/**/*.js']
+    symlink: {
+      dotfiles: {
+        relativeSrc: grunt.file.expandMapping(
+          ['dotfiles/*'],
+          'dest',
+          { cwd: 'dotfiles' }
+        ),
+        options: {
+          type: 'file'
+        }
+      }
     },
     watch: {
       files: '<config:lint.files>',
@@ -29,6 +38,9 @@ module.exports = function(grunt) {
       globals: {}
     }
   });
+
+  // Load npm tasks
+  grunt.loadNpmTasks('grunt-symlink');
 
   // Default task.
   grunt.registerTask('default', 'lint test');
