@@ -1,3 +1,6 @@
 [submodule "submodules/oh-my-zsh"]
 	path = submodules/oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
+[submodule "submodules/eagle.zsh-theme"]
+	path = submodules/eagle.zsh-theme
+	url = git@github.com:neagle/eagle.zsh-theme.git

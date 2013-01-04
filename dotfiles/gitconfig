@@ -1,0 +1,24 @@
+[user]
+    name = Nate Eagle
+    email = n.eagle@gmail.com 
+
+[color]
+    diff = true
+    status = auto
+    branch = auto
+    interactive = auto
+    ui = true
+
+[core]
+    excludesfile = ~/.gitignore
+    editor = vim
+    whitespace = fix
+    pager = less
+    #autocrlf = true
+
+[alias]
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+    pretty-diff = !~/Projects/pretty-diff/pretty-diff.js
+    gist-diff = !~/Projects/pretty-diff/gist-diff.js
+    pd = !~/Projects/pretty-diff/pretty-diff.js
+    gd = !~/Projects/pretty-diff/gist-diff.js
