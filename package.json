@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "grunt": "devel",
-    "grunt-symlink": "~0.2.0"
+    "grunt-symlink": "~0.2.0",
+    "grunt-contrib-jshint": "~0.1.0"
   }
 }

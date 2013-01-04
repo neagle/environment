@@ -1,40 +1,41 @@
-/*global module:false*/
-module.exports = function(grunt) {
+/*global module:false */
+module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
-    home: process.env.HOME,
-    lint: {
-      files: ['Gruntfile.js']
+    env: {
+      home: process.env.HOME,
+      pwd: process.env.PWD
     },
+
     symlink: {
 
       'oh-my-zsh': {
-        dest: '<%= home %>/.oh-my-zsh',
-        relativeSrc: process.env.PWD + '/submodules/oh-my-zsh',
+        dest: '<%= env.home %>/.oh-my-zsh',
+        relativeSrc: '<%= env.pwd %>/submodules/oh-my-zsh',
         options: {
           type: 'dir'
         }
       },
 
       zshrc: {
-        dest: '<%= home %>/.zshrc',
-        relativeSrc: process.env.PWD + '/dotfiles/zshrc'
+        dest: '<%= env.home %>/.zshrc',
+        relativeSrc: '<%= env.pwd %>/dotfiles/zshrc'
       },
 
       'eagle.zsh-theme': {
         dest: 'submodules/oh-my-zsh/themes/eagle.zsh-theme',
-        relativeSrc: process.env.PWD + '/submodules/eagle.zsh-theme/eagle.zsh-theme'
+        relativeSrc: '<%= env.pwd %>/submodules/eagle.zsh-theme/eagle.zsh-theme'
       },
 
       gitconfig: {
-        dest: '<%= home %>/.gitconfig',
-        relativeSrc: process.env.PWD + '/dotfiles/gitconfig'
+        dest: '<%= env.home %>/.gitconfig',
+        relativeSrc: '<%= env.pwd %>/dotfiles/gitconfig'
       },
 
       vim: {
-        dest: '<%= home %>/.vim',
-        relativeSrc: process.env.PWD + '/submodules/vim',
+        dest: '<%= env.home %>/.vim',
+        relativeSrc: '<%= env.pwd %>/submodules/vim',
         options: {
           type: 'dir'
         }
@@ -42,54 +43,45 @@ module.exports = function(grunt) {
 
       // Vim Settings
       vimrc: {
-        dest: '<%= home %>/.vimrc',
-        relativeSrc: process.env.PWD + '/submodules/vim/vimrc'
+        dest: '<%= env.home %>/.vimrc',
+        relativeSrc: '<%= env.pwd %>/submodules/vim/vimrc'
       },
 
       // A file for personal vim settings
       'vimrc.settings': {
-        dest: '<%= home %>/.vimrc.settings',
-        relativeSrc: process.env.PWD + '/dotfiles/vimrc.settings'
+        dest: '<%= env.home %>/.vimrc.settings',
+        relativeSrc: '<%= env.pwd %>/dotfiles/vimrc.settings'
       },
 
       'jshintrc': {
-        dest: '<%= home %>/.jshintrc',
-        relativeSrc: process.env.PWD + '/dotfiles/jshintrc'
+        dest: '<%= env.home %>/.jshintrc',
+        relativeSrc: '<%= env.pwd %>/dotfiles/jshintrc'
       }
 
     },
-    watch: {
-      files: '<config:lint.files>',
-      tasks: 'lint test'
-    },
     jshint: {
+      all: [
+        'Gruntfile.js',
+        'tasks/*.js'
+      ],
       options: {
-        curly: true,
-        eqeqeq: true,
-        immed: true,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        sub: true,
-        undef: true,
-        boss: true,
-        eqnull: true
-      },
-      globals: {}
+        jshintrc: '.jshintrc'
+      }
+      // globals: {}
     }
   });
 
   // Load npm tasks
   grunt.loadNpmTasks('grunt-symlink');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
 
+  // Sometimes you need to debug some things to figure out what's going on
+  // Reference on grunt.log: https://github.com/gruntjs/grunt/wiki/grunt.log
   grunt.registerTask('debug', 'A task to output debugging information.', function () {
-    grunt.log.writeln('Debug this!');
-
     grunt.log.writeflags(process.env);
   });
 
   // Default task.
-  grunt.registerTask('default', ['symlink']);
-  // grunt.registerTask('default', ['debug']);
+  grunt.registerTask('default', ['jshint', 'symlink']);
 
 };
