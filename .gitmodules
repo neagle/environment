@@ -4,3 +4,6 @@
 [submodule "submodules/eagle.zsh-theme"]
 	path = submodules/eagle.zsh-theme
 	url = git@github.com:neagle/eagle.zsh-theme.git
+[submodule "submodules/vim"]
+	path = submodules/vim
+	url = git@github.com:neagle/.vim.git
