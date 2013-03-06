@@ -60,14 +60,15 @@ module.exports = function (grunt) {
 
     },
     jshint: {
-      all: [
-        'Gruntfile.js',
-        'tasks/*.js'
-      ],
       options: {
         jshintrc: '.jshintrc'
+      },
+      gruntfile: {
+        src: 'Gruntfile.js'
+      },
+      tasks: {
+        src: 'tasks/*.js'
       }
-      // globals: {}
     }
   });
 
