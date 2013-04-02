@@ -7,3 +7,6 @@
 [submodule "submodules/vim"]
 	path = submodules/vim
 	url = git@github.com:neagle/.vim.git
+[submodule "submodules/get-shit-done"]
+	path = submodules/get-shit-done
+	url = git://github.com/leftnode/get-shit-done.git
