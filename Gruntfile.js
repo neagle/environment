@@ -53,9 +53,14 @@ module.exports = function (grunt) {
         relativeSrc: '<%= env.pwd %>/dotfiles/vimrc.settings'
       },
 
-      'jshintrc': {
+      jshintrc: {
         dest: '<%= env.home %>/.jshintrc',
         relativeSrc: '<%= env.pwd %>/dotfiles/jshintrc'
+      },
+
+      'tmux.conf': {
+        dest: '<%= env.home %>/.tmux.conf',
+        relativeSrc: '<%= env.pwd %>/dotfiles/tmux.conf'
       }
 
     },

@@ -18,6 +18,8 @@ autoload -U zmv
 
 alias get-shit-done="~/environment/submodules/get-shit-done/get-shit-done.sh"
 
+eval `ssh-agent`
+
 # Todo.txt setup
 #export TODOTXT_DEFAULT_ACTION=ls
 #export TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k 2,2 -k 1,1n'
@@ -63,4 +65,10 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
+<<<<<<< HEAD
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
+=======
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
+
+export PATH=$PATH:/var/lib/gems/1.8/bin
+>>>>>>> 53102834f1799a788531e45a91d8c2a65bad518a
