@@ -8,13 +8,43 @@ ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="eagle"
 # ZSH_THEME="agnoster"
 
-eval `ssh-agent`
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+
+export EDITOR='vim'
+
+exit() {
+    if [[ -z $TMUX ]]; then
+        builtin exit
+    else
+        tmux detach
+    fi
+}
+
+# https://wiki.archlinux.org/index.php/Sudo#Passing_aliases
+alias sudo='sudo '
+
+# http://zshwiki.org/home/builtin/functions/zmv
+autoload -U zmv
+
+# Get Shit Done setup
+alias get-shit-done="~/environment/submodules/get-shit-done/get-shit-done.sh"
 
 # Todo.txt setup
 #export TODOTXT_DEFAULT_ACTION=ls
 #export TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k 2,2 -k 1,1n'
 alias t="~/dotfiles/todo-txt/todo.txt-cli/todo.sh -d ~/dotfiles/todo-txt/todo.cfg"
 alias todo="t"
+
+upload-image() { scp $1 neagle@nateeagle.com:/home/neagle/nateeagle.com/repo/assets/images/posts/$2 }
+upload-sgf() { scp $1 neagle@nateeagle.com:home/neagle/nateeagle.com/repo/assets/sgf/$2 }
+
+lll() {
+    if [[ -f ./.lsrc ]]; then
+        ls `cat .lsrc` $*
+    else
+        ls $*
+    fi
+}
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -31,19 +61,23 @@ alias todo="t"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
 
 # Uncomment following line if you want red dots to be displayed while waiting for completion
 # COMPLETION_WAITING_DOTS="true"
+#
+
+# https://github.com/robbyrussell/oh-my-zsh/wiki/Plugins#tmuxinator
+alias mux=tmuxinator
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git)
+plugins=(git tmuxinator ssh-agent)
 
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
 
 export PATH=$PATH:/var/lib/gems/1.8/bin
