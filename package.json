@@ -11,7 +11,7 @@
     "node": ">= 0.8.16"
   },
   "devDependencies": {
-    "grunt": "~0.4.0",
+    "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.1.0",
     "grunt-symlink": "~0.3.0"
   }

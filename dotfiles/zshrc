@@ -11,29 +11,59 @@ ZSH_THEME="eagle"
 # https://wiki.archlinux.org/index.php/Sudo#Passing_aliases
 alias sudo='sudo '
 
+alias work='get-shit-done work'
+alias play='get-shit-done play'
+
+flvdownload() {
+    rtmpdump  -r $1 -W "http://media.kelbymediagroup.com/players/player-4.6-licensed.swf" -o ~/Movies/$2
+}
+
+#alias hub=git
+
 # http://zshwiki.org/home/builtin/functions/zmv
 autoload -U zmv
-
-# Get Shit Done setup
-
-alias get-shit-done="~/environment/submodules/get-shit-done/get-shit-done.sh"
 
 eval `ssh-agent`
 
 # Todo.txt setup
 #export TODOTXT_DEFAULT_ACTION=ls
 #export TODOTXT_SORT_COMMAND='env LC_COLLATE=C sort -k 2,2 -k 1,1n'
-alias t="~/dotfiles/todo-txt/todo.txt-cli/todo.sh -d ~/dotfiles/todo-txt/todo.cfg"
+alias t="~/environment/submodules/todo.txt-cli/todo.sh -d $HOME/Dropbox/todo/todo.cfg"
 alias todo="t"
 
 upload-image() { scp $1 neagle@nateeagle.com:/home/neagle/nateeagle.com/repo/assets/images/posts/$2 }
 upload-sgf() { scp $1 neagle@nateeagle.com:home/neagle/nateeagle.com/repo/assets/sgf/$2 }
 
-lll() {
+ls() {
     if [[ -f ./.lsrc ]]; then
-        ls `cat .lsrc` $*
+        /bin/ls `cat .lsrc` $*
     else
-        ls $*
+        /bin/ls $*
+    fi
+}
+
+upload() {
+    destination=${2-nateeagle};
+    file=$1;
+    extension=${file#*.}
+
+    # Hey, we might want to send stuff somewhere else someday
+    if [[ "$destination" == "nateeagle" ]]; then
+        case "$extension" in
+        "png"|"jpg"|"gif")
+            echo "Uploading image to /images/posts/$file";
+            filepath="/var/www/vhost/nateeagle.com/repo/assets/images/posts/"
+            ;;
+        "sgf")
+            echo "Uploading sgf to /sgf/$file";
+            filepath="/var/www/vhost/nateeagle.com/repo/assets/sgf/"
+            ;;
+        esac
+    fi
+
+    if [ filepath ]; then
+        echo "Uploading $file to $destination."
+        scp $file nateeagle:$filepath;
     fi
 }
 
@@ -65,10 +95,25 @@ plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-<<<<<<< HEAD
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin
-=======
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/X11/bin
-
 export PATH=$PATH:/var/lib/gems/1.8/bin
->>>>>>> 53102834f1799a788531e45a91d8c2a65bad518a
+export PATH=$PATH:/Users/nateeagle5/environment/submodules/get-shit-done
+
+[ -s "/Users/nateeagle5/.scm_breeze/scm_breeze.sh" ] && source "/Users/nateeagle5/.scm_breeze/scm_breeze.sh"
+
+# http://superuser.com/questions/397362/zsh-expansion-for-a-timestamp/409429#409429
+function unix_ts { LBUFFER="${LBUFFER}$(date '+%Y%m%d%H%M%S')" }
+zle -N unix_ts
+bindkey "^t" unix_ts
+
+bindkey -s "[1" "\$e1"
+bindkey -s "[2" "\$e2"
+bindkey -s "[3" "\$e3"
+bindkey -s "[4" "\$e4"
+bindkey -s "[5" "\$e5"
+bindkey -s "[6" "\$e6"
+bindkey -s "[7" "\$e7"
+bindkey -s "[8" "\$e8"
+bindkey -s "[9" "\$e9"
+
+eval "$(rbenv init -)"

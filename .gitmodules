@@ -10,3 +10,9 @@
 [submodule "submodules/get-shit-done"]
 	path = submodules/get-shit-done
 	url = git://github.com/leftnode/get-shit-done.git
+[submodule "submodules/scm_breeze"]
+	path = submodules/scm_breeze
+	url = git://github.com/ndbroadbent/scm_breeze.git
+[submodule "submodules/todo.txt-cli"]
+	path = submodules/todo.txt-cli
+	url = https://github.com/ginatrapani/todo.txt-cli.git

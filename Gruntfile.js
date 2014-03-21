@@ -61,6 +61,11 @@ module.exports = function (grunt) {
       'tmux.conf': {
         dest: '<%= env.home %>/.tmux.conf',
         relativeSrc: '<%= env.pwd %>/dotfiles/tmux.conf'
+      },
+
+      scm_breeze: {
+        dest: '<%= env.home %>/.scm_breeze',
+        relativeSrc: '<%= env.pwd %>/submodules/scm_breeze'
       }
 
     },
